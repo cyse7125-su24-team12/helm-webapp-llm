@@ -46,7 +46,7 @@ spec:
               value: {{ .value | quote }}
               {{- end }}
             {{- end }}
-          # livenessProbe:
-          #   {{ toYaml .Values.livenessProbe | nindent 12 }}
+        #   livenessProbe:
+        #     {{- toYaml .Values.livenessProbe | nindent 10 }}
       affinity: {{ toYaml .Values.affinity | nindent 8 }}
       
