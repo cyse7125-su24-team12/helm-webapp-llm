@@ -7,7 +7,7 @@ replicaCount: 2
 image:
   repository: bala699/webapp-llm
   pullPolicy: IfNotPresent
-  tag: "1.0.1"
+  tag: "1.0.3"
 
 imagePullSecrets:
   - name: docker-secret
@@ -78,8 +78,13 @@ resources:
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    port: 80
+    path: /healthz
+  initialDelaySeconds: 5
+  periodSeconds: 15
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
 readinessProbe:
   httpGet:
     path: /
@@ -125,11 +130,6 @@ affinity:
               app: webapp-llm
 
 env:
-  - name: GROQ_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: apikey-secret
-        key: GROQ_API_KEY
   - name: PINECONE_API_KEY
     valueFrom:
       secretKeyRef:
@@ -141,8 +141,8 @@ env:
         name: apikey-secret
         key: HFACE_API_TOKEN
   - name: PINECONE_INDEX_NAME
-    value: "csye7125-chunks-250"
+    value: "csye7125"
   - name: PINECONE_NAMESPACE
     value: "default"
-  - name: GROQ_MODEL_NAME
-    value: "llama-3.1-70b-versatile"
+  - name: OLLAMA_URL
+    value: "http://ec2-3-80-111-248.compute-1.amazonaws.com:11434/api/generate"
