@@ -47,6 +47,12 @@ spec:
               {{- end }}
             {{- end }}
         #   livenessProbe:
-        #     {{- toYaml .Values.livenessProbe | nindent 10 }}
+        #     httpGet:
+        #       path: {{ .Values.livenessProbe.httpGet.path }}
+        #       port: {{ .Values.livenessProbe.httpGet.port }}
+        #   readinessProbe:
+        #     httpGet:
+        #       path: {{ .Values.readinessProbe.httpGet.path }}
+        #       port: {{ .Values.readinessProbe.httpGet.port }}
       affinity: {{ toYaml .Values.affinity | nindent 8 }}
       
