@@ -6,8 +6,8 @@ replicaCount: 2
 
 image:
   repository: bala699/webapp-llm
-  pullPolicy: IfNotPresent
-  tag: "1.0.3"
+  pullPolicy: Always
+  tag: "1.2.0"
 
 imagePullSecrets:
   - name: docker-secret
@@ -145,4 +145,6 @@ env:
   - name: PINECONE_NAMESPACE
     value: "default"
   - name: OLLAMA_URL
-    value: "http://ec2-3-80-111-248.compute-1.amazonaws.com:11434/api/generate"
+    value: "http://ollam-release-ollama.ollama.svc.cluster.local:11434"
+  - name: MODEL_NAME
+    value: "llama3.1:8b"
