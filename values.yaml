@@ -141,7 +141,7 @@ env:
         name: apikey-secret
         key: HFACE_API_TOKEN
   - name: PINECONE_INDEX_NAME
-    value: "csye7125"
+    value: "csye7125-project"
   - name: PINECONE_NAMESPACE
     value: "default"
   - name: OLLAMA_URL
